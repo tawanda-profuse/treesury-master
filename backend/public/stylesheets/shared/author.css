@@ -1,0 +1,40 @@
+.author-row {
+    display: flex;
+    justify-content: space-between;
+    /* margin-bottom: 1rem; */
+    padding: 10px 0;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+  }
+  
+  .author-name {
+    font-size: 1.5rem;
+  }
+
+  @media (width < 490px){
+    .author-row{
+      flex-direction: column;
+    }
+
+    .btn-row{
+      margin: 10px 0;
+    }
+  }
+
+  .categ-form-del button:hover{
+    background-color: tomato;
+  }
+
+  .view-button:hover{
+    background-color: skyblue;
+    color: white;
+  }
+
+  .edit-button:hover{
+    background-color: var(--grass);
+    color: white;
+  }
+
+  .search-button:hover{
+    background-color: var(--karat);
+  }

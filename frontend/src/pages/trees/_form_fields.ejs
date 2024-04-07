@@ -1,0 +1,29 @@
+<div class="form-row">
+  <div class="form-item">
+    <label>Tree Name</label>
+    <input type="text" name="tree_name" value="<%= tree.tree_name %>">
+  </div>
+  <div class="form-item">
+    <label>Family (Genus)</label>
+    <select id="category-selector" name="category">
+      <% categories.forEach(category=> { %>
+        <% if (category.id===tree.category) { %>
+          <option selected label="<%= category.name %>" value="<%= category.id %>">
+            <% } else { %>
+          <option label="<%= category.name %>" value="<%= category.id %>">
+            <% } %>
+              <% }) %>
+    </select>
+  </div>
+  <a class="new-category" title="Add new category" href="/categories/new"><i class="fas fa-plus"></i></a>
+</div>
+<div class="form-row">
+  <div class="form-item form-item-no-grow">
+    <label>Image</label>
+    <input type="file" name="cover" class="book-cover filepond">
+  </div>
+  <div class="form-item">
+    <label>Description</label>
+    <textarea name="description" placeholder="Give details about the tree"><%= tree.description %></textarea>
+  </div>
+</div>
