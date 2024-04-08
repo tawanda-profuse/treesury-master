@@ -9,13 +9,14 @@ import Landing from "./pages/Landing/Landing";
 import PageTitle from "./components/Partials/PageTitle";
 import Header from "./components/Header/Header";
 import Home from "./pages/Home/Home";
-import Categories from "./pages/Categories/Categories";
+// import Categories from "./pages/Categories/Categories";
 import NewCategory from "./pages/Categories/NewCategory";
 import Details from "./pages/Categories/Details";
 import Trees from "./pages/Trees/Trees";
 import TreeDetails from "./pages/Trees/TreeDetails";
 import NewTree from "./pages/Trees/NewTree";
 import NotFound from "./pages/NotFound";
+import CategoryIndex from "./pages/Categories/Categories";
 
 function App() {
   return (
@@ -33,7 +34,7 @@ function App() {
                 <Home />
               </Route>
               <Route exact path="/categories">
-                <Categories />
+                <CategoryIndex/>
               </Route>
               <Route exact path="/categories/:id">
                 <Details />

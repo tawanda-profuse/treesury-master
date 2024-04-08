@@ -3,7 +3,7 @@ import CategoryList from "../../components/Partials/CategoryList";
 import useFetch from "../../utils/useFetch";
 import "./Categories.css";
 
-const Categories = () => {
+const CategoryIndex = () => {
   useEffect(() => {
     document.title = "Tree Categories";
   }, []);
@@ -38,4 +38,4 @@ const Categories = () => {
     </>
   );
 };
-export default Categories;
+export default CategoryIndex;
