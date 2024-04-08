@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import "./Categories.css";
 
-const NewCategory = () => {
+const CreateCategory = () => {
   useEffect(() => {
     document.title = "Add New Tree Category";
   }, []);
@@ -71,4 +71,4 @@ const NewCategory = () => {
   );
 };
 
-export default NewCategory;
+export default CreateCategory;
