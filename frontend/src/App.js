@@ -10,7 +10,7 @@ import Header from "./components/Header/Header";
 import Home from "./pages/Home/Home";
 import Trees from "./pages/trees/Trees";
 import TreeDetails from "./pages/trees/TreeDetails";
-import NewTree from "./pages/Trees/NewTree";
+import NewTree from "./pages/trees/NewTree";
 import CategoryIndex from "./pages/categories/Categories";
 import CreateCategory from "./pages/categories/CreateCategory";
 import CategoryDetails from "./pages/categories/CategoryDetails";
