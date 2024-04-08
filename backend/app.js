@@ -4,24 +4,21 @@ if (process.env.NODE_ENV !== 'production') {
 
 const express = require('express');
 const app = express();
-const expressLayouts = require('express-ejs-layouts');
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 const mongoose = require('mongoose');
 const session = require('express-session');
+const cors = require("cors");
+const morgan = require('morgan');
 
-const indexRouter = require('./routes/index')
 const categoryRouter = require('./routes/categories')
 const itemRouter = require('./routes/trees')
-
-// Public Folder
-app.use("/public", express.static('public')); 
-app.use(express.static('public'))
 
 // DB Config
 const db = require('./config/keys').mongoURI;
 
 // Connect to MongoDB
+mongoose.set('strictQuery', false);
 mongoose
   .connect(
     db,
@@ -29,16 +26,6 @@ mongoose
   )
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log(err));
-
-// EJS
-app.use(expressLayouts);
-app.set('view engine', 'ejs');
-app.set('views', __dirname + '/views')
-app.set('layout', 'layouts/layout')
-
-// Excluding the layouts from the web pages
-app.set('layout landing', false); 
-app.set('layout index', false); 
 
 // Express body parser
 app.use(bodyParser.urlencoded({
@@ -57,14 +44,19 @@ app.use(
   })
 );
 
+// middleware & static files
+app.use(express.json());
+app.use(cors());
+app.use(express.urlencoded({extended: true}));
+app.use(morgan('dev'));
+
 // Method Override
 app.use(methodOverride('_method'))
 
 // Routes
-app.use('/', indexRouter)
 app.use('/categories', categoryRouter)
 app.use('/trees', itemRouter)
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 7000;
 
 app.listen(PORT, console.log(`Server running on port ${PORT}`));

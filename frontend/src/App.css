@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Darumadrop+One&display=swap');
+
+.page-header {
+    font-size: 3rem;
+    text-align: center;
+    font-family: 'Darumadrop One', cursive;
+}
+
+.container {
+    max-width: 80%;
+    margin: 3rem auto;
+}
+
+.inner-container {
+    margin: 100px auto;
+}
+
+footer{
+    font-family: 'Darumadrop One', cursive;
+    width: 100%;
+    background-color: var(--ground);
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    padding: 5px 0;
+  }
+  
+  footer a{
+    color: var(--clouds);
+    text-decoration: none;
+    font-size: 1.1rem;
+  }
+  
+  footer a:hover{
+    color: var(--karat);
+  }

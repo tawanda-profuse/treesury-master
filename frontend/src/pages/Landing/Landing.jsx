@@ -1,18 +1,19 @@
 import { useEffect } from "react";
 import "./Landing.css";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
 const Landing = () => {
   useEffect(() => {
     document.title = "Welcome to Treesury";
   }, []);
   return (
-    <>
+    <main id="landing-page">
       <header id="showcase">
         <h1>Welcome To Treesury</h1>
         <p>The best place to learn about trees — The oxygen of the earth.</p>
-        <a href="/roots" className="button">
+        <Link to="/roots" className="button">
           Continue
-        </a>
+        </Link>
         <a className="scroll-down" href="#section-a">
           <i className="fas fa-arrow-down"></i>
         </a>
@@ -73,7 +74,7 @@ const Landing = () => {
           </p>
         </div>
       </section>
-    </>
+    </main>
   );
 };
 

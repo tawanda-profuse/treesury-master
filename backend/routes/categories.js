@@ -1,102 +1,85 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const Category = require('../models/category');
-const Tree = require('../models/tree');
+const Category = require("../models/category");
+const Tree = require("../models/tree");
 
-// All Categories Route
-router.get('/', async (req, res) => {
+// GET All Categories Route
+router.get("/", async (req, res) => {
   let searchOptions = {};
-  if (req.query.name != null && req.query.name !== '') {
-    searchOptions.name = new RegExp(req.query.name, 'i');
+  if (req.query.name != null && req.query.name !== "") {
+    searchOptions.name = new RegExp(req.query.name, "i");
   }
+  const categories = await Category.find(searchOptions);
   try {
-    const categories = await Category.find(searchOptions);
-    res.render('categories/index', { 
-      categories: categories,
-      searchOptions: req.query
-    });
-  } catch {
-    res.redirect('/');
+    res.json(categories);
+  } catch (error) {
+    console.error(error);
   }
 });
 
-// New Category Route
-router.get('/new', (req, res) => {
-  res.render('categories/new', { category: new Category() });
-});
-
-// Create Category Route
-router.post('/', async (req, res) => {
-  const category = new Category({
-    name: req.body.name
-  });
+// POST Category Route
+router.post("/", async (req, res) => {
+  const category = new Category(req.body);
   try {
-    const newCategory = await category.save();
-    res.redirect(`categories/${newCategory.id}`);
-  } catch {
-    res.render('categories/new', {
-      category: category,
-    });
+    await category.save();
+    console.log(category);
+    res.redirect("/categories");
+  } catch (error) {
+    console.error(error);
   }
 });
 
-// Show Categories Route
-router.get('/:id', async (req, res) => {
-  try { 
-    const category = await Category.findById(req.params.id);
-    const trees = await Tree.find({ category: category.id }).limit(6).exec();
-    res.render('categories/show', {
-      category: category,
-      treesByCategory: trees
-    });
-  } catch {
-    res.redirect('/');
+// GET one Category Route
+router.get("/:id", async (req, res) => {
+  const category = await Category.findById(req.params.id);
+  const trees = await Tree.find({ category: category.id }).limit(6).exec();
+  try {
+    res.json({ category: category, trees: trees });
+  } catch (error) {
+    console.error(error);
   }
 });
 
 // Edit Category Route
-router.get('/:id/edit', async (req, res) => {
+router.get("/:id/edit", async (req, res) => {
   try {
     const category = await Category.findById(req.params.id);
-    res.render('categories/edit', { category: category });
+    res.render("categories/edit", { category: category });
   } catch {
-    res.redirect('/categories');
+    res.redirect("/categories");
   }
 });
 
 // Edit Category Route
-router.put('/:id', async (req, res) => {
+router.put("/:id", async (req, res) => {
   let category;
   try {
     category = await Category.findById(req.params.id);
     category.name = req.body.name;
     await category.save();
     res.redirect(`/categories/${category.id}`);
-  } catch {
+  } catch (error) {
     if (category == null) {
-      res.redirect('/');
+      console.error("No category found.");
     } else {
-      res.render('categories/edit', {
-        category: category
-      })
-    }
-  }
-})
-
-// Delete Category Route
-router.delete('/:id', async (req, res) => {
-  let category;
-  try {
-    category = await Category.findById(req.params.id);
-    await category.remove();
-    res.redirect('/categories');
-  } catch {
-    if (category == null) {
-      res.redirect('/');
-    } else {
-      res.redirect(`/categories/${category.id}`);
+      console.error(error);
     }
   }
 });
 
-module.exports = router
+// Delete Category Route
+router.delete("/:id", async (req, res) => {
+  let category;
+  try {
+    category = await Category.findById(req.params.id);
+    await category.remove();
+  } catch (error) {
+    if (category == null) {
+      console.error("Category not found.");
+    } else {
+      console.error(error);
+    }
+  }
+});
+
+module.exports = router;

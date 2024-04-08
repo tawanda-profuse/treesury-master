@@ -1,15 +1,18 @@
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import "./Header.css";
+
 const Header = () => {
   return (
     <nav className="header-nav">
       <div className="navbar__container">
-        <a className="header-title" href="/roots">
+        <Link className="header-title" to="/roots">
           <img
             width="150px"
-            src="/public/images/treesury.png"
+            src={"/images/treesury.png"}
             alt="Treesury Logo"
             id="navbar__logo"
           />
-        </a>
+        </Link>
         <div className="navbar__toggle" id="mobile-menu">
           <span className="bar" title="Toggle menu">
             <i className="fas fa-folder-tree"></i>
@@ -22,24 +25,24 @@ const Header = () => {
             </a>
           </li>
           <li className="navbar__item" title="View all categories">
-            <a className="navbar__links" href="/categories">
+            <Link className="navbar__links" to="/categories">
               Categories
-            </a>
+            </Link>
           </li>
           <li className="navbar__item" title="Create a new category">
-            <a className="navbar__links" href="/categories/new">
+            <Link className="navbar__links" to="/categories/new">
               Add Category
-            </a>
+            </Link>
           </li>
           <li className="navbar__item" title="View all trees">
-            <a className="navbar__links" href="/trees">
+            <Link className="navbar__links" to="/trees">
               Trees
-            </a>
+            </Link>
           </li>
           <li className="navbar__item" title="Add a new tree">
-            <a className="navbar__links" href="/trees/new">
+            <Link className="navbar__links" to="/trees/new">
               New Tree
-            </a>
+            </Link>
           </li>
         </ul>
       </div>
