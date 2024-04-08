@@ -8,12 +8,12 @@ import Landing from "./pages/Landing/Landing";
 import PageTitle from "./components/Partials/PageTitle";
 import Header from "./components/Header/Header";
 import Home from "./pages/Home/Home";
-import Trees from "./pages/Trees/Trees";
-import TreeDetails from "./pages/Trees/TreeDetails";
+import Trees from "./pages/trees/Trees";
+import TreeDetails from "./pages/trees/TreeDetails";
 import NewTree from "./pages/Trees/NewTree";
-import CategoryIndex from "./pages/Categories/Categories";
-import CreateCategory from "./pages/Categories/CreateCategory";
-import CategoryDetails from "./pages/Categories/CategoryDetails";
+import CategoryIndex from "./pages/categories/Categories";
+import CreateCategory from "./pages/categories/CreateCategory";
+import CategoryDetails from "./pages/categories/CategoryDetails";
 
 function App() {
   return (
