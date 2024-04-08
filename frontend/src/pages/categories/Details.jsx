@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import useFetch from "../../utils/useFetch";
 import { useEffect } from "react";
-import CategoryGrid from "../../components/Partials/DataGrid";
+import CategoryGrid from "../../components/Partials/CategoryGrid";
 
 const Details = () => {
   const { id } = useParams();
@@ -12,7 +12,7 @@ const Details = () => {
 
   useEffect(() => {
     if (data) {
-      document.title = `Trees in the ${data.category.name} category`;
+      document.title = `Trees in the ${data.categoryName} category`;
     }
   });
 
@@ -22,8 +22,8 @@ const Details = () => {
       {isPending && <div>Loading...</div>}
       {data && (
         <>
-          <h2 class="page-header">Trees in the {data.category.name} Family</h2>
-          <CategoryGrid category={data} />
+          <h2 className="page-header">Trees in the {data.categoryName} Family</h2>
+          <CategoryGrid information={data} />
         </>
       )}
     </>

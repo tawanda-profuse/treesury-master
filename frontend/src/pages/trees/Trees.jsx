@@ -1,5 +1,4 @@
-import { useEffect } from "react";
-import CategoryGrid from "../../components/Partials/DataGrid";
+import { useEffect, useState } from "react";
 import useFetch from "../../utils/useFetch";
 import TreeList from "../../components/TreeList/TreeList";
 
@@ -11,26 +10,30 @@ const Trees = () => {
     ? "http://localhost:7000/trees"
     : "https://treesury.onrender.com/trees";
   const [data, isPending, error] = useFetch(url);
+  const [searchTerm, setSearchTerm] = useState("");
+  const filteredData = data.filter((item) =>
+    item.tree_name.toLowerCase().includes(searchTerm)
+  );
   return (
     <>
       <h2 className="page-header">Search Trees</h2>
-      <form action="/trees" method="GET">
+      <form>
         <div className="form-row">
           <div className="form-item">
             <label>Tree Name</label>
-            <input type="text" name="tree_name" />
+            <input
+              type="text"
+              name="tree_name"
+              placeholder="Search for a tree name"
+              onChange={(e) => setSearchTerm(e.target.value)}
+            />
           </div>
-        </div>
-        <div className="form-row form-row-end">
-          <button className="btn btn-primary" type="submit">
-            Search
-          </button>
         </div>
       </form>
       <br />
       {error && <div>{error}</div>}
       {isPending && <div>Loading...</div>}
-      {data && <TreeList trees={data} />}
+      {data && <TreeList trees={filteredData} />}
     </>
   );
 };

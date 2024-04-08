@@ -20,17 +20,12 @@ const Header = () => {
         </div>
         <ul className="nav">
           <li className="navbar__item" title="View all categories">
-            <a className="navbar__links" href="/#section-a">
-              About
-            </a>
-          </li>
-          <li className="navbar__item" title="View all categories">
             <Link className="navbar__links" to="/categories">
               Categories
             </Link>
           </li>
           <li className="navbar__item" title="Create a new category">
-            <Link className="navbar__links" to="/categories/new">
+            <Link className="navbar__links" to="/category/new">
               Add Category
             </Link>
           </li>
@@ -40,7 +35,7 @@ const Header = () => {
             </Link>
           </li>
           <li className="navbar__item" title="Add a new tree">
-            <Link className="navbar__links" to="/trees/new">
+            <Link className="navbar__links" to="/tree/new">
               New Tree
             </Link>
           </li>

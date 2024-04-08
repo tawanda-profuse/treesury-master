@@ -14,6 +14,7 @@ import NewCategory from "./pages/Categories/NewCategory";
 import Details from "./pages/Categories/Details";
 import Trees from "./pages/Trees/Trees";
 import TreeDetails from "./pages/Trees/TreeDetails";
+import NewTree from "./pages/Trees/NewTree";
 
 function App() {
   return (
@@ -36,7 +37,7 @@ function App() {
               <Route exact path="/categories/:id">
                 <Details />
               </Route>
-              <Route exact path="/categories/new">
+              <Route exact path="/category/new">
                 <NewCategory />
               </Route>
               <Route exact path="/trees">
@@ -44,6 +45,9 @@ function App() {
               </Route>
               <Route exact path="/trees/:id">
                 <TreeDetails />
+              </Route>
+              <Route exact path="/tree/new">
+                <NewTree/>
               </Route>
             </div>
             <footer>

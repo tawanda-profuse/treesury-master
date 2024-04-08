@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const FormFields = ({categoryName}) => {
+const CategoryForm = ({categoryName}) => {
   const [name, setName] = useState(categoryName);
   return (
     <div className="form-row">
@@ -21,4 +21,4 @@ const FormFields = ({categoryName}) => {
   );
 };
 
-export default FormFields;
+export default CategoryForm;

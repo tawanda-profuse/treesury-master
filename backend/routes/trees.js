@@ -1,13 +1,11 @@
 const express = require("express");
 const router = express.Router();
 const Tree = require("../models/tree");
-const Category = require("../models/category");
 const imageMimeTypes = ["image/jpeg", "image/png", "images/gif", "image/jfif"];
 
 // GET All Trees Route
 router.get("/", async (req, res) => {
   const trees = await Tree.find();
-
   try {
     res.json(trees);
   } catch (error) {

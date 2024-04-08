@@ -5,11 +5,7 @@ const Tree = require("../models/tree");
 
 // GET All Categories Route
 router.get("/", async (req, res) => {
-  let searchOptions = {};
-  if (req.query.name != null && req.query.name !== "") {
-    searchOptions.name = new RegExp(req.query.name, "i");
-  }
-  const categories = await Category.find(searchOptions);
+  const categories = await Category.find();
   try {
     res.json(categories);
   } catch (error) {
@@ -33,8 +29,9 @@ router.post("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   const category = await Category.findById(req.params.id);
   const trees = await Tree.find({ category: category.id }).limit(6).exec();
+  const categoryName = category.name;
   try {
-    res.json({ category: category, trees: trees });
+    res.json({categoryName, trees});
   } catch (error) {
     console.error(error);
   }
