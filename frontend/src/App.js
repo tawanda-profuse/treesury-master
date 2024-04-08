@@ -4,18 +4,16 @@ import {
   Route,
   Switch,
 } from "react-router-dom/cjs/react-router-dom.min";
-import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 import Landing from "./pages/Landing/Landing";
 import PageTitle from "./components/Partials/PageTitle";
 import Header from "./components/Header/Header";
 import Home from "./pages/Home/Home";
-import Details from "./pages/Categories/Details";
 import Trees from "./pages/Trees/Trees";
 import TreeDetails from "./pages/Trees/TreeDetails";
 import NewTree from "./pages/Trees/NewTree";
-import NotFound from "./pages/NotFound";
 import CategoryIndex from "./pages/Categories/Categories";
 import CreateCategory from "./pages/Categories/CreateCategory";
+import CategoryDetails from "./pages/Categories/CategoryDetails";
 
 function App() {
   return (
@@ -33,13 +31,13 @@ function App() {
                 <Home />
               </Route>
               <Route exact path="/categories">
-                <CategoryIndex/>
+                <CategoryIndex />
               </Route>
               <Route exact path="/categories/:id">
-                <Details />
+                <CategoryDetails/>
               </Route>
               <Route exact path="/category/new">
-                <CreateCategory/>
+                <CreateCategory />
               </Route>
               <Route exact path="/trees">
                 <Trees />
@@ -49,9 +47,6 @@ function App() {
               </Route>
               <Route exact path="/tree/new">
                 <NewTree />
-              </Route>
-              <Route path="*">
-                <NotFound />
               </Route>
             </div>
             <footer>
@@ -64,7 +59,6 @@ function App() {
               </a>
             </footer>
           </div>
-          <Redirect to="/not-found" />
         </Switch>
       </BrowserRouter>
     </>

@@ -3,7 +3,7 @@ import useFetch from "../../utils/useFetch";
 import { useEffect } from "react";
 import CategoryGrid from "../../components/Partials/CategoryGrid";
 
-const Details = () => {
+const CategoryDetails = () => {
   const { id } = useParams();
   const url = window.location.origin.includes("localhost")
     ? `http://localhost:7000/categories/${id}`
@@ -30,4 +30,4 @@ const Details = () => {
   );
 };
 
-export default Details;
+export default CategoryDetails;
