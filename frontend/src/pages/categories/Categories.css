@@ -10,6 +10,14 @@
     margin-bottom: .5rem;
   }
 
+  .btn-row{
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
   .top-space{
     display: flex;
     justify-content: space-between;
@@ -124,7 +132,6 @@
   .author-row {
     display: flex;
     justify-content: space-between;
-    /* margin-bottom: 1rem; */
     padding: 10px 0;
     border-top: 1px solid black;
     border-bottom: 1px solid black;
@@ -149,7 +156,8 @@
   }
 
   .view-button:hover{
-    background-color: skyblue;
+    background-color: var(--grass);
+    border-color: var(--grass);
     color: white;
   }
 
