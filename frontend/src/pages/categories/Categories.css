@@ -8,7 +8,13 @@
   .form-row {
     display: flex;
     margin-bottom: .5rem;
-    /* position: relative; */
+  }
+
+  .top-space{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
   }
 
   @media (width < 530px){
@@ -34,26 +40,24 @@
   }
 
   .new-category{
-    padding: 6px;
-    position: absolute;
-    right: 10%;
+    padding: 0.3rem 1.3rem;
     z-index: 50;
-    top: 20%;
     background-color: burlywood;
     color: black;
     border-radius: 50%;
-    vertical-align: middle;
     font-size: 2rem;
     transition: 0.2s;
   }
 
   .new-category:hover{
-    transform: scale(1.2);
-    border: 3px solid green;
+    transform: scale(1.1);
   }
   
   .form-row-end {
     justify-content: flex-end;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin: 2rem 0;
   }
   
   .form-item > label {

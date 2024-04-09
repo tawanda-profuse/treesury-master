@@ -46,7 +46,6 @@ function App() {
                 <TreeDetails />
               </Route>
               <Route exact path="/tree/new">
-                {/* <NewTree /> */}
                 <NewTree/>
               </Route>
             </div>

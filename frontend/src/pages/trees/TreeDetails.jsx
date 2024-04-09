@@ -7,40 +7,47 @@ import "./Tree.css";
 
 const TreeDetails = () => {
   const { id } = useParams();
-  useEffect(() => {
-    document.title = "Tree Details";
-  }, []);
   const url = window.location.origin.includes("localhost")
     ? `http://localhost:7000/trees/${id}`
     : `https://treesury.onrender.com/trees/${id}`;
   const [data, isPending, error] = useFetch(url);
+
+  if(data.tree){
+    console.log(data.tree.tree_name);
+  }
+  useEffect(() => {
+    if(data.tree){
+      document.title = `Tree Details for ${data.tree.tree_name}`;
+    }
+  });
+
   return (
     <>
       {error && <p>{error}</p>}
       {isPending && <p>Loading...</p>}
-      {data && (
+      {data.tree &&  (
         <>
-          <h2 class="page-header">{data.tree_name}</h2>
+          <h2 class="page-header">{data.tree.tree_name}</h2>
           <div class="book-details">
             <div>
               <img
                 class="book-cover"
-                src={`data:${data.coverImageType};base64, ${Buffer.from(
-                  data.coverImage.data
+                src={`data:${data.tree.coverImageType};base64, ${Buffer.from(
+                  data.tree.coverImage.data
                 ).toString("base64")}`}
-                alt={data.tree_name}
+                alt={data.tree.tree_name}
               />
               <div class="book-details-btn-grid">
                 <Link
                   class="btn btn-primary edit-button"
-                  to={`/trees/${data._id}/edit`}
+                  to={`/trees/${data.tree._id}/edit`}
                 >
                   <i class="fas fa-pen"></i>
                 </Link>
-                <DeleteForm url={`/trees/${data._id}`} />
+                <DeleteForm url={`/trees/${data.tree._id}`} />
                 <Link
                   class="btn btn-primary view-button"
-                  to={`/categories/${data.category._id}`}
+                  to={`/categories/${data.tree.category}`}
                 >
                   <i class="fas fa-eye"></i>
                 </Link>
@@ -48,9 +55,9 @@ const TreeDetails = () => {
             </div>
             <div class="book-details-grid">
               <div class="book-details-label">Family (Genus):</div>
-              <div>{data.category.name}</div>
+              <div>{data.categoryName}</div>
               <div class="book-details-label">Tree Description:</div>
-              <div>{data.description}</div>
+              <div>{data.tree.description}</div>
             </div>
           </div>
         </>

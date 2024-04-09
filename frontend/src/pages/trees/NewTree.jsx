@@ -48,7 +48,12 @@ const NewTree = () => {
   };
   return (
     <>
-      <h2 class="page-header">New Tree</h2>
+      <div className="top-space">
+        <h2 class="page-header">New Tree</h2>
+        <Link class="new-category" title="Add new category" to="/category/new">
+          <i class="fas fa-plus"></i>
+        </Link>
+      </div>
       <form onSubmit={(e) => handleAddTree(e)}>
         <div class="form-row">
           <div class="form-item">
@@ -56,6 +61,7 @@ const NewTree = () => {
             <input
               type="text"
               name="tree_name"
+              placeholder="Enter a tree name"
               value={treeName}
               onChange={(e) => setTreeName(e.target.value)}
             />
@@ -75,13 +81,6 @@ const NewTree = () => {
                 ))}
             </select>
           </div>
-          <Link
-            class="new-category"
-            title="Add new category"
-            to="/category/new"
-          >
-            <i class="fas fa-plus"></i>
-          </Link>
         </div>
         <div class="form-row">
           <div class="form-item form-item-no-grow">
@@ -101,12 +100,12 @@ const NewTree = () => {
             ></textarea>
           </div>
         </div>
-        <div class="form-row form-row-end btn-row">
+        <div class="form-row form-row-end">
           <Link class="btn btn-danger" to="/trees">
-            Cancel
+            Cancel <i className="fas fa-times"></i>
           </Link>
           <button class="btn btn-primary" type="submit">
-            Add
+            Add <i className="fas fa-plus"></i>
           </button>
         </div>
       </form>

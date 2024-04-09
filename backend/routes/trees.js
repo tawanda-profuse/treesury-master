@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Tree = require("../models/tree");
+const Category = require("../models/category");
 const imageMimeTypes = ["image/jpeg", "image/png", "images/gif", "image/jfif"];
 
 // GET All Trees Route
@@ -27,9 +28,11 @@ router.post("/", async (req, res) => {
 
 // GET single Product Route
 router.get("/:id", async (req, res) => {
-  const tree = await Tree.findById(req.params.id).populate("category").exec();
+  const tree = await Tree.findById(req.params.id);
+  const category = await Category.findById(tree.category._id);
+  const categoryName = category.name;
   try {
-    res.json(tree);
+    res.json({categoryName, tree});
   } catch (error) {
     console.error(error);
   }

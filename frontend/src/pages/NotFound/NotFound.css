@@ -1,24 +1,22 @@
-.tree-animation{
-    text-align: center;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    translate: -50% -50%;
-    width: 100%;
-    padding: 2rem 0;
-    margin: 2rem auto;
+.not-found{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 2rem;
 }
+
 .tree-animation i{
     font-size: 12rem;
     color: green;
-    animation: swerve 2s linear 0s infinite alternate;
+    animation: swerve 1s linear 0s infinite alternate;
 }
 
 @keyframes swerve {
     from{
-        transform: skew(-16deg);
+        transform: skew(0);
     }
     to{
-        transform: skew(16deg);
+        transform: skew(-16deg);
     }
 }

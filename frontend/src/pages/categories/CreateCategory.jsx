@@ -56,14 +56,14 @@ const CreateCategory = () => {
         </div>
         <div className="form-row form-row-end btn-row">
           <Link className="btn btn-danger" to="/categories" title="Cancel">
-            <i className="fas fa-times"></i>
+            Cancel <i className="fas fa-times"></i>
           </Link>
           <button
             className="btn btn-primary edit-button"
             type="submit"
             title="Add item"
           >
-            <i className="fas fa-plus"></i>
+            Add <i className="fas fa-plus"></i>
           </button>
         </div>
       </form>
