@@ -102,9 +102,9 @@ const NewTree = () => {
           </div>
         </div>
         <div class="form-row form-row-end btn-row">
-          <a class="btn btn-danger" href="/trees">
+          <Link class="btn btn-danger" to="/trees">
             Cancel
-          </a>
+          </Link>
           <button class="btn btn-primary" type="submit">
             Add
           </button>
