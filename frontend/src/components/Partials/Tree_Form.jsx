@@ -15,6 +15,8 @@ const TreeForm = () => {
         </div>
         <div class="form-item">
           <label>Family (Genus)</label>
+          {error && <label>{error}</label>}
+          {isPending && <label>{isPending}</label>}
           <select id="category-selector" name="category">
             {categories &&
               categories.map((category) => (

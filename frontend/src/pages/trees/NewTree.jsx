@@ -62,6 +62,8 @@ const NewTree = () => {
           </div>
           <div class="form-item">
             <label>Family (Genus)</label>
+            {error && <label>{error}</label>}
+            {isPending && <label>{isPending}</label>}
             <select
               id="category-selector"
               name="category"
@@ -84,7 +86,12 @@ const NewTree = () => {
         <div class="form-row">
           <div class="form-item form-item-no-grow">
             <label>Image</label>
-            <input type="file" name="cover" class="book-cover filepond" onChange={(e) => setCoverImage(e.target.value)}/>
+            <input
+              type="file"
+              name="cover"
+              class="book-cover filepond"
+              onChange={(e) => setCoverImage(e.target.value)}
+            />
           </div>
           <div class="form-item">
             <label>Description</label>
