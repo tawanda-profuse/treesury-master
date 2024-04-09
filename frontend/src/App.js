@@ -1,9 +1,5 @@
 import "./App.css";
-import {
-  BrowserRouter,
-  Route,
-  Switch,
-} from "react-router-dom/cjs/react-router-dom.min";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Landing from "./pages/Landing/Landing";
 import PageTitle from "./components/Partials/PageTitle";
 import Header from "./components/Header/Header";
@@ -14,12 +10,14 @@ import CategoryIndex from "./pages/categories/Categories";
 import CreateCategory from "./pages/categories/CreateCategory";
 import CategoryDetails from "./pages/categories/CategoryDetails";
 import NewTree from "./pages/trees/NewTree";
+import NotFound from "./pages/NotFound/NotFound";
+import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
 function App() {
   return (
     <>
-      <PageTitle title="Welcome to Treesury" />
       <BrowserRouter>
+        <PageTitle title="Welcome to Treesury" />
         <Switch>
           <Route exact path="/">
             <Landing />
@@ -46,8 +44,9 @@ function App() {
                 <TreeDetails />
               </Route>
               <Route exact path="/tree/new">
-                <NewTree/>
+                <NewTree />
               </Route>
+              <Redirect to="/not-found" />
             </div>
             <footer>
               <a
@@ -60,6 +59,10 @@ function App() {
             </footer>
           </div>
         </Switch>
+        {/* Route for 404 Not Found - render outside the container div */}
+        <Route exact path="/not-found">
+          <NotFound />
+        </Route>
       </BrowserRouter>
     </>
   );
