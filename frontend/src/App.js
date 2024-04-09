@@ -34,7 +34,7 @@ function App() {
                 <CategoryIndex />
               </Route>
               <Route exact path="/categories/:id">
-                <CategoryDetails/>
+                <CategoryDetails />
               </Route>
               <Route exact path="/category/new">
                 <CreateCategory />

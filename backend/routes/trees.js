@@ -66,14 +66,16 @@ router.put("/:id", async (req, res) => {
 
 // Delete Product Page
 router.delete("/:id", async (req, res) => {
-  let tree;
-  try {
-    tree = await Tree.findById(req.params.id);
-    await tree.remove();
-    res.redirect("/trees");
-  } catch (error) {
-    console.error(error);
-  }
+  const id = req.params.id;
+
+  Tree.findByIdAndDelete(id)
+    .then((result) => {
+      console.log("Tree deleted successfully.");
+      res.redirect("/trees");
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 });
 
 function saveCover(tree, coverEncoded) {

@@ -13,7 +13,7 @@ const CreateCategory = () => {
     ? "http://localhost:7000/categories"
     : "https://treesury.onrender.com/categories";
 
-  const handleAddTree = async (event) => {
+  const handleAddCategory = async (event) => {
     event.preventDefault();
     const response = await fetch(url, {
       method: "POST",
@@ -38,7 +38,7 @@ const CreateCategory = () => {
   return (
     <>
       <h2 className="page-header">New Category</h2>
-      <form onSubmit={(e) => handleAddTree(e)}>
+      <form onSubmit={(e) => handleAddCategory(e)}>
         <div className="form-row">
           <div className="form-item">
             <label>Name</label>

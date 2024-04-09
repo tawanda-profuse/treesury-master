@@ -31,7 +31,7 @@ router.get("/:id", async (req, res) => {
   const trees = await Tree.find({ category: category.id }).limit(6).exec();
   const categoryName = category.name;
   try {
-    res.json({categoryName, trees});
+    res.json({ categoryName, trees });
   } catch (error) {
     console.error(error);
   }
@@ -66,17 +66,16 @@ router.put("/:id", async (req, res) => {
 
 // Delete Category Route
 router.delete("/:id", async (req, res) => {
-  let category;
-  try {
-    category = await Category.findById(req.params.id);
-    await category.remove();
-  } catch (error) {
-    if (category == null) {
-      console.error("Category not found.");
-    } else {
-      console.error(error);
-    }
-  }
+  const id = req.params.id;
+
+  Category.findByIdAndDelete(id)
+    .then((result) => {
+      console.log("Category deleted successfully.");
+      res.redirect("/categories");
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 });
 
 module.exports = router;

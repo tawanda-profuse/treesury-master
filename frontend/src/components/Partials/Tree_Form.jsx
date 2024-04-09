@@ -2,11 +2,10 @@ import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import useFetch from "../../utils/useFetch";
 
 const TreeForm = () => {
-  const categories = [];
-  const tree = "hleoo";
-  const url = window.location.origin.includes("localhost") ?
-  "http://localhost:7000/categories" : "https://treesury.onrender.com/categories"; 
-  const [data, isPending, error] = useFetch(url);
+  const url = window.location.origin.includes("localhost")
+    ? "http://localhost:7000/categories"
+    : "https://treesury.onrender.com/categories";
+  const [categories, isPending, error] = useFetch(url);
   return (
     <>
       <div class="form-row">
@@ -17,17 +16,10 @@ const TreeForm = () => {
         <div class="form-item">
           <label>Family (Genus)</label>
           <select id="category-selector" name="category">
-            {categories.map((category) =>
-              category._id === tree.category ? (
-                <option
-                  selected
-                  label={category.name}
-                  value={category._id}
-                ></option>
-              ) : (
+            {categories &&
+              categories.map((category) => (
                 <option label={category.name} value={category._id}></option>
-              )
-            )}
+              ))}
           </select>
         </div>
         <Link class="new-category" title="Add new category" to="/category/new">
