@@ -48,9 +48,12 @@
     height: 100%;
   }
   
-  .header-nav li a:hover,
-  .header-title:hover {
-    color: var(--karat);
+  .header-nav li a {
+    transition: 0.1s ease;
+  }
+  .header-nav li a:hover {
+    text-decoration: underline;
+    padding-left: 1rem;
   }
   
   .navbar__toggle .bar {
@@ -59,16 +62,14 @@
   
   @media screen and (max-width: 960px) {
     .header-nav{
-      width: 90%;
+      width: 100%;
       left: 0;
-    }
-    .navbar__container {
       display: flex;
       justify-content: space-between;
-      height: 80px;
+      margin: auto;
+    }
+    .navbar__container {
       z-index: 1;
-      width: 100%;
-      max-width: 90%;
       padding: 0;
     }
     .nav {
@@ -86,12 +87,11 @@
     .nav.active {
       background: var(--karat);
       top: 100%;
-      left: 0;
       opacity: 1;
       transition: all 0.5s ease;
       z-index: 99;
-      height: 100vh;
-      width: 100vw;
+      height: 50vh;
+      width: 100%;
       font-size: 1.3rem;
       text-align: center;
     }
@@ -99,7 +99,7 @@
     .nav.active .navbar__item {
       padding: 20px 0;
       width: 100%;
-      border-bottom: 1px solid black;
+      border-top: 1px solid black;
     }
   
     .header-title img {
@@ -110,6 +110,7 @@
       display: inline-block;
       cursor: pointer;
       font-size: 1.8rem;
+      margin-right: 1rem;
     }
     .navbar__links {
       padding: 0;

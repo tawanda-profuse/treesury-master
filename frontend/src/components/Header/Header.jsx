@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import "./Header.css";
+import { useState } from "react";
 
 const Header = () => {
+  const [active, setActive] = useState(false);
+
   return (
     <nav className="header-nav">
       <div className="navbar__container">
@@ -13,12 +16,16 @@ const Header = () => {
             id="navbar__logo"
           />
         </Link>
-        <div className="navbar__toggle" id="mobile-menu">
+        <div
+          className={`navbar__toggle ${active ? "is-active" : ""}`}
+          id="mobile-menu"
+          onClick={() => setActive(!active)}
+        >
           <span className="bar" title="Toggle menu">
-            <i className="fas fa-folder-tree"></i>
+            <i className={`fas ${active ? "fa-times" : "fa-folder-tree"}`}></i>
           </span>
         </div>
-        <ul className="nav">
+        <ul className={`nav ${active ? "active" : ""}`}>
           <li className="navbar__item" title="View all categories">
             <Link className="navbar__links" to="/categories">
               Categories
