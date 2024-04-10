@@ -10,8 +10,6 @@ import CategoryIndex from "./pages/categories/Categories";
 import CreateCategory from "./pages/categories/CreateCategory";
 import CategoryDetails from "./pages/categories/CategoryDetails";
 import NewTree from "./pages/trees/NewTree";
-import NotFound from "./pages/NotFound/NotFound";
-import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
 
 function App() {
   return (
@@ -46,7 +44,6 @@ function App() {
               <Route exact path="/tree/new">
                 <NewTree />
               </Route>
-              <Redirect to="/not-found" />
             </div>
             <footer>
               <a
@@ -59,10 +56,6 @@ function App() {
             </footer>
           </div>
         </Switch>
-        {/* Route for 404 Not Found - render outside the container div */}
-        <Route exact path="/not-found">
-          <NotFound />
-        </Route>
       </BrowserRouter>
     </>
   );

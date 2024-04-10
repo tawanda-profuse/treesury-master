@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import useFetch from "../../utils/useFetch";
+import UploadTreeImage from "../../components/UploadTreeImage";
 
 const NewTree = () => {
   useEffect(() => {
@@ -10,17 +11,33 @@ const NewTree = () => {
   const history = useHistory();
   const [treeName, setTreeName] = useState("");
   const [category, setCategory] = useState("");
-  const [coverImage, setCoverImage] = useState("");
   const [description, setDescription] = useState("");
+  const [coverImage, setCoverImage] = useState(null);
   const [trees, setTrees] = useState([]);
-  const url = window.location.origin.includes("localhost")
-    ? "http://localhost:7000"
-    : "https://treesury.onrender.com";
-  const [categories, isPending, error] = useFetch(`${url}/categories`);
+  const categoryUrl = window.location.origin.includes("localhost")
+    ? "http://localhost:7000/categories"
+    : "https://treesury.onrender.com/categories";
+  const [categories, isPending, error] = useFetch(categoryUrl);
+  const treeUrl = window.location.origin.includes("localhost")
+    ? "http://localhost:7000/trees"
+    : "https://treesury.onrender.com/trees";
+
+  const handleFileUpload = (fileItems) => {
+    if (fileItems.length > 0) {
+      const uploadedFile = fileItems[0].file;
+      const reader = new FileReader();
+      reader.onload = () => {
+        const base64String = reader.result; // Get base64-encoded string
+        setCoverImage(base64String); // Store base64 string in state
+      };
+      // Read the uploadedFile (Blob) as data URL
+      reader.readAsDataURL(uploadedFile);
+    }
+  };
 
   const handleAddTree = async (event) => {
     event.preventDefault();
-    const response = await fetch(url, {
+    const response = await fetch(treeUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -28,35 +45,45 @@ const NewTree = () => {
       body: JSON.stringify({
         treeName,
         category,
-        coverImage,
         description,
+        coverImage,
       }),
     });
 
-    const newTree = await response.json();
+    if (!response.ok) {
+      throw new Error("Failed to add tree");
+    }
 
+    const newTree = await response.json();
+    
     try {
-      setTrees([newTree, ...trees]);
+      console.log(newTree);
       setTreeName("");
       setCategory("");
-      setCoverImage("");
       setDescription("");
-      history.push("/trees");
+      setCoverImage(null);
+      setTrees([newTree, ...trees]);
+      history.push(`/trees/${newTree._id}`);
     } catch (error) {
-      console.log(error);
+      console.error("Error adding tree:", error);
     }
   };
+
   return (
     <>
       <div className="top-space">
-        <h2 class="page-header">New Tree</h2>
-        <Link class="new-category" title="Add new category" to="/category/new">
-          <i class="fas fa-plus"></i>
+        <h2 className="page-header">New Tree</h2>
+        <Link
+          className="new-category"
+          title="Add new category"
+          to="/category/new"
+        >
+          <i className="fas fa-plus"></i>
         </Link>
       </div>
       <form onSubmit={(e) => handleAddTree(e)}>
-        <div class="form-row">
-          <div class="form-item">
+        <div className="form-row">
+          <div className="form-item">
             <label>Tree Name</label>
             <input
               type="text"
@@ -66,7 +93,7 @@ const NewTree = () => {
               onChange={(e) => setTreeName(e.target.value)}
             />
           </div>
-          <div class="form-item">
+          <div className="form-item">
             <label>Family (Genus)</label>
             {error && <label>{error}</label>}
             {isPending && <label>{isPending}</label>}
@@ -77,34 +104,35 @@ const NewTree = () => {
             >
               {categories &&
                 categories.map((category) => (
-                  <option label={category.name} value={category._id}></option>
+                  <option
+                    label={category.name}
+                    value={category._id}
+                    key={category._id}
+                  ></option>
                 ))}
             </select>
           </div>
         </div>
-        <div class="form-row">
-          <div class="form-item form-item-no-grow">
+        <div className="form-row">
+          <div className="form-item form-item-no-grow">
             <label>Image</label>
-            <input
-              type="file"
-              name="cover"
-              class="book-cover filepond"
-              onChange={(e) => setCoverImage(e.target.value)}
-            />
+            <UploadTreeImage handleFileUpload={handleFileUpload} />
           </div>
-          <div class="form-item">
+          <div className="form-item">
             <label>Description</label>
             <textarea
               name="description"
               placeholder="Give details about the tree"
-            ></textarea>
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+            />
           </div>
         </div>
-        <div class="form-row form-row-end">
-          <Link class="btn btn-danger" to="/trees">
+        <div className="form-row form-row-end">
+          <Link className="btn btn-danger" to="/trees">
             Cancel <i className="fas fa-times"></i>
           </Link>
-          <button class="btn btn-primary" type="submit">
+          <button className="btn btn-primary" type="submit">
             Add <i className="fas fa-plus"></i>
           </button>
         </div>

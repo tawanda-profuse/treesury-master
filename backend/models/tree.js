@@ -10,12 +10,10 @@ const treeSchema = new mongoose.Schema({
   },
   coverImage: {
     type: Buffer,
-    // default: '',
-    required: true
   }, 
   coverImageType: {
     type: String,
-    required: true
+    // required: true
   },
   category: {
     type: mongoose.Schema.Types.ObjectId,

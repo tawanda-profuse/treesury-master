@@ -14,18 +14,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-// POST Product Route
-router.post("/", async (req, res) => {
-  const tree = new Tree(req.body);
-  saveCover(tree, req.body.cover);
-
-  try {
-    await tree.save();
-  } catch (error) {
-    console.error(error);
-  }
-});
-
 // GET single Product Route
 router.get("/:id", async (req, res) => {
   const tree = await Tree.findById(req.params.id);
@@ -47,6 +35,43 @@ router.get("/:id/edit", async (req, res) => {
     console.error(error);
   }
 });
+
+// POST Product Route
+router.post("/", async (req, res) => {
+  const tree = new Tree(req.body);
+  saveCover(tree, req.body.cover);
+
+  try {
+    await tree.save();
+    res.redirect(`/trees/${tree.id}`);
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+// router.post('/', async (req, res) => {
+//   const { tree_name, description, cover } = req.body;
+
+//   try {
+//     const tree = new Tree({
+//       tree_name,
+//       description,
+//       category: req.body.category, // Assuming category is sent in the request body
+//     });
+
+//     if (cover) {
+//       const coverData = JSON.parse(cover);
+//       tree.coverImage = Buffer.from(coverData.data, 'base64');
+//       tree.coverImageType = coverData.type;
+//     }
+
+//     await tree.save();
+//     res.redirect(`/trees/${tree.id}`);
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send('Error saving tree');
+//   }
+// });
 
 // Update Product Route
 router.put("/:id", async (req, res) => {
