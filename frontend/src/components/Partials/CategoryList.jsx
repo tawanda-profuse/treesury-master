@@ -22,7 +22,7 @@ const CategoryList = ({ categories }) => {
             >
               <i className="fas fa-pen"></i>
             </Link>
-            <DeleteForm id={category._id} />
+            <DeleteForm ID={category._id} directory={"categories"} />
           </div>
         </div>
       ))}

@@ -11,7 +11,7 @@ const Landing = () => {
       <header id="showcase">
         <h1>Welcome To Treesury</h1>
         <p>The best place to learn about trees — The oxygen of the earth.</p>
-        <Link to="./roots" className="button">
+        <Link to="/roots" className="button">
           Continue
         </Link>
         <a className="scroll-down" href="#section-a">

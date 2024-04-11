@@ -12,7 +12,7 @@ const Trees = () => {
   const [data, isPending, error] = useFetch(url);
   const [searchTerm, setSearchTerm] = useState("");
   const filteredData = data.filter((item) =>
-    item.tree_name.toLowerCase().includes(searchTerm)
+    item.tree_name.toLowerCase().includes(searchTerm.toLowerCase())
   );
   return (
     <>

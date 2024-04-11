@@ -1,17 +1,17 @@
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
-const DeleteForm = ({id}) => {
+const DeleteForm = ({ID, directory}) => {
   const history = useHistory();
   const url = window.location.origin.includes("localhost")
-    ? "http://localhost:7000/categories"
-    : "https://treesury.onrender.com/categories";
+    ? `http://localhost:7000/${directory}`
+    : `https://treesury.onrender.com/${directory}`;
 
-  const deleteCategory = async () => {
-    fetch(`${url}/${id}`, {
+  const deleteObject = async () => {
+    fetch(`${url}/${ID}`, {
       method: "DELETE",
     }).then(() => {
-      history.push("/categories");
-    }, 1000);
+      history.push(`/${directory}`);
+    });
   };
 
   return (
@@ -19,7 +19,7 @@ const DeleteForm = ({id}) => {
       <button
         className="btn btn-danger"
         title="Delete item"
-        onClick={() => deleteCategory()}
+        onClick={() => deleteObject()}
       >
         <i className="fas fa-trash"></i>
       </button>

@@ -71,7 +71,6 @@ router.delete("/:id", async (req, res) => {
   Category.findByIdAndDelete(id)
     .then((result) => {
       console.log("Category deleted successfully.");
-      res.redirect("/categories");
     })
     .catch((error) => {
       console.log(error);

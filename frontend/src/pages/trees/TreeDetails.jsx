@@ -12,9 +12,6 @@ const TreeDetails = () => {
     : `https://treesury.onrender.com/trees/${id}`;
   const [data, isPending, error] = useFetch(url);
 
-  if(data.tree){
-    console.log(data.tree.tree_name);
-  }
   useEffect(() => {
     if(data.tree){
       document.title = `Tree Details for ${data.tree.tree_name}`;
@@ -44,7 +41,7 @@ const TreeDetails = () => {
                 >
                   <i class="fas fa-pen"></i>
                 </Link>
-                <DeleteForm url={`/trees/${data.tree._id}`} />
+                <DeleteForm ID={data.tree._id} directory={"trees"} />
                 <Link
                   class="btn btn-primary view-button"
                   to={`/categories/${data.tree.category}`}

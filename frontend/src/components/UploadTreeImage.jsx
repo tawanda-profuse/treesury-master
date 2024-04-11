@@ -33,18 +33,6 @@ const UploadTreeImage = ({ handleFileUpload }) => {
       allowFileTypeValidation={true}
       acceptedFileTypes={["image/*"]}
       maxFiles={1}
-    //   server={{
-    //     process: (fieldName, file, metadata, load) => {
-    //       const reader = new FileReader();
-    //       reader.onload = () => {
-    //         load(reader.result);
-    //       };
-    //       reader.readAsDataURL(file);
-    //     },
-    //     revert: (filename, load) => {
-    //       load();
-    //     },
-    //   }}
       labelIdle='Drag & Drop your image or <span class="filepond--label-action">Browse</span>'
       imageCropAspectRatio="1:1" // Adjust according to your aspect ratio
       stylePanelAspectRatio={1 / coverAspectRatio} // Set the panel aspect ratio directly

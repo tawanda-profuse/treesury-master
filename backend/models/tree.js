@@ -6,14 +6,16 @@ const treeSchema = new mongoose.Schema({
     required: true
   },
   description: {
-    type: String
+    type: String,
+    required: true
   },
   coverImage: {
     type: Buffer,
+    required: true
   }, 
   coverImageType: {
     type: String,
-    // required: true
+    required: true
   },
   category: {
     type: mongoose.Schema.Types.ObjectId,
@@ -28,4 +30,6 @@ treeSchema.virtual('coverImagePath').get(function() {
   }
 })
 
-module.exports = mongoose.model('Tree', treeSchema)
+const Tree = mongoose.model('Tree', treeSchema);
+
+module.exports = Tree;

@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const Tree = require("../models/tree");
 const Category = require("../models/category");
+const Tree = require("../models/tree");
 const imageMimeTypes = ["image/jpeg", "image/png", "images/gif", "image/jfif"];
 
 // GET All Trees Route
@@ -20,7 +20,7 @@ router.get("/:id", async (req, res) => {
   const category = await Category.findById(tree.category._id);
   const categoryName = category.name;
   try {
-    res.json({categoryName, tree});
+    res.json({ categoryName, tree });
   } catch (error) {
     console.error(error);
   }
@@ -43,37 +43,12 @@ router.post("/", async (req, res) => {
 
   try {
     await tree.save();
-    res.redirect(`/trees/${tree.id}`);
+    res.redirect(`http://localhost:3000/trees/${tree.id}`);
   } catch (error) {
     console.error(error);
   }
 });
 
-// router.post('/', async (req, res) => {
-//   const { tree_name, description, cover } = req.body;
-
-//   try {
-//     const tree = new Tree({
-//       tree_name,
-//       description,
-//       category: req.body.category, // Assuming category is sent in the request body
-//     });
-
-//     if (cover) {
-//       const coverData = JSON.parse(cover);
-//       tree.coverImage = Buffer.from(coverData.data, 'base64');
-//       tree.coverImageType = coverData.type;
-//     }
-
-//     await tree.save();
-//     res.redirect(`/trees/${tree.id}`);
-//   } catch (error) {
-//     console.error(error);
-//     res.status(500).send('Error saving tree');
-//   }
-// });
-
-// Update Product Route
 router.put("/:id", async (req, res) => {
   let tree;
 
@@ -92,20 +67,6 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// Delete Product Page
-router.delete("/:id", async (req, res) => {
-  const id = req.params.id;
-
-  Tree.findByIdAndDelete(id)
-    .then((result) => {
-      console.log("Tree deleted successfully.");
-      res.redirect("/trees");
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-});
-
 function saveCover(tree, coverEncoded) {
   if (coverEncoded == null) return;
   const cover = JSON.parse(coverEncoded);
@@ -114,5 +75,19 @@ function saveCover(tree, coverEncoded) {
     tree.coverImageType = cover.type;
   }
 }
+
+// Delete Product Page
+router.delete("/:id", async (req, res) => {
+  const id = req.params.id;
+
+  Tree.findByIdAndDelete(id)
+    .then((result) => {
+      console.log("Tree deleted successfully.");
+      res.redirect("http://localhost:3000/trees");
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
 
 module.exports = router;
