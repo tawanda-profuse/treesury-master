@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const router = express.Router();
 const Category = require("../models/category");
@@ -71,6 +72,7 @@ router.delete("/:id", async (req, res) => {
   Category.findByIdAndDelete(id)
     .then((result) => {
       console.log("Category deleted successfully.");
+      res.redirect(`${process.env.HREF}/categories`);
     })
     .catch((error) => {
       console.log(error);

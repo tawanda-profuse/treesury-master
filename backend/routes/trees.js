@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const router = express.Router();
 const Category = require("../models/category");
@@ -43,7 +44,7 @@ router.post("/", async (req, res) => {
 
   try {
     await tree.save();
-    res.redirect(`http://localhost:3000/trees/${tree.id}`);
+    res.redirect(`${process.env.HREF}/trees/${tree.id}`);
   } catch (error) {
     console.error(error);
   }
@@ -79,15 +80,14 @@ function saveCover(tree, coverEncoded) {
 // Delete Product Page
 router.delete("/:id", async (req, res) => {
   const id = req.params.id;
-
-  Tree.findByIdAndDelete(id)
-    .then((result) => {
-      console.log("Tree deleted successfully.");
-      res.redirect("http://localhost:3000/trees");
-    })
-    .catch((error) => {
-      console.log(error);
-    });
+  try {
+    await Tree.findByIdAndDelete(id);
+    console.log("Tree deleted successfully.");
+    res.redirect(`${process.env.HREF}/trees`);
+  } catch (error) {
+    console.log("Error deleting tree:", error);
+    res.status(500).json({ message: "Failed to delete tree" });
+  }
 });
 
 module.exports = router;
