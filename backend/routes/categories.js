@@ -38,24 +38,14 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// Edit Category Route
-router.get("/:id/edit", async (req, res) => {
-  try {
-    const category = await Category.findById(req.params.id);
-    res.render("categories/edit", { category: category });
-  } catch {
-    res.redirect("/categories");
-  }
-});
-
-// Edit Category Route
+// PUT Category Route
 router.put("/:id", async (req, res) => {
   let category;
   try {
     category = await Category.findById(req.params.id);
     category.name = req.body.name;
     await category.save();
-    res.redirect(`/categories/${category.id}`);
+    res.redirect(`${process.env.HREF}/categories/${category.id}`);
   } catch (error) {
     if (category == null) {
       console.error("No category found.");
@@ -65,7 +55,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// Delete Category Route
+// DELETE Category Route
 router.delete("/:id", async (req, res) => {
   const id = req.params.id;
 

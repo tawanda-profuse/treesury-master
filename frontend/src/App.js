@@ -12,6 +12,8 @@ import CategoryDetails from "./pages/categories/CategoryDetails";
 import NewTree from "./pages/trees/NewTree";
 import NotFound from "./pages/NotFound/NotFound";
 import { Redirect } from "react-router-dom/cjs/react-router-dom.min";
+import EditCategory from "./pages/categories/EditCategory";
+import EditTree from "./pages/trees/EditTree";
 
 function App() {
   return (
@@ -37,6 +39,9 @@ function App() {
               <Route exact path="/category/new">
                 <CreateCategory />
               </Route>
+              <Route exact path="/categories/:id/edit">
+                <EditCategory/>
+              </Route>
               <Route exact path="/trees">
                 <Trees />
               </Route>
@@ -45,6 +50,9 @@ function App() {
               </Route>
               <Route exact path="/tree/new">
                 <NewTree />
+              </Route>
+              <Route exact path="/trees/:id/edit">
+                <EditTree/>
               </Route>
             </div>
             <footer>

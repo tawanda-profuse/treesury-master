@@ -35,6 +35,7 @@ const CreateCategory = () => {
       console.log(error);
     }
   };
+
   return (
     <>
       <h2 className="page-header">New Category</h2>

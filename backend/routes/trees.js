@@ -27,16 +27,6 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// GET Edit Product Route
-router.get("/:id/edit", async (req, res) => {
-  const tree = await Tree.findById(req.params.id);
-  try {
-    res.json(tree);
-  } catch (error) {
-    console.error(error);
-  }
-});
-
 // POST Product Route
 router.post("/", async (req, res) => {
   const tree = new Tree(req.body);
@@ -62,7 +52,7 @@ router.put("/:id", async (req, res) => {
       saveCover(tree, req.body.cover);
     }
     await tree.save();
-    res.redirect(`/trees/${tree.id}`);
+    res.redirect(`${process.env.HREF}/trees/${tree.id}`);
   } catch (error) {
     console.error(error);
   }
