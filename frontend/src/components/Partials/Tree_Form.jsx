@@ -61,7 +61,7 @@ const TreeForm = ({ tree }) => {
       </div>
       <div className="form-row">
         <div className="form-item form-item-no-grow">
-          <label>Image</label>
+          <label>Image (optional)</label>
           <UploadTreeImage handleFileUpload={handleFileUpload} />
         </div>
         <div className="form-item">

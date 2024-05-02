@@ -3,7 +3,11 @@ const express = require("express");
 const router = express.Router();
 const Category = require("../models/category");
 const Tree = require("../models/tree");
-const imageMimeTypes = ["image/jpeg", "image/png", "images/gif", "image/jfif"];
+const axios = require("axios");
+const imageMimeTypes = ["image/jpeg", "image/png", "image/gif"];
+const DEFAULT_IMAGE_URL =
+  "https://static.vecteezy.com/system/resources/previews/006/851/591/original/tree-illustration-with-cartoon-style-free-vector.jpg";
+
 
 // GET All Trees Route
 router.get("/", async (req, res) => {
@@ -58,12 +62,44 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-function saveCover(tree, coverEncoded) {
-  if (coverEncoded == null) return;
-  const cover = JSON.parse(coverEncoded);
-  if (cover != null && imageMimeTypes.includes(cover.type)) {
-    tree.coverImage = new Buffer.from(cover.data, "base64");
-    tree.coverImageType = cover.type;
+
+async function imageUrlToBuffer(imageUrl) {
+  try {
+    const response = await axios.get(imageUrl, {
+      responseType: "arrayBuffer",
+    });
+
+    // Convert the image to a buffer
+    const buffer = Buffer.from(response.data, "binary");
+
+    return buffer;
+  } catch (error) {
+    console.error(`Error fetching image: ${error}`);
+    throw error;
+  }
+}
+
+async function saveCover(tree, coverEncoded) {
+  if (!coverEncoded) {
+    tree.coverImage = await imageUrlToBuffer(DEFAULT_IMAGE_URL);
+    tree.coverImageType = "image/jpeg"; // Assuming default image is a jpeg
+    return;
+  }
+
+  try {
+    const cover = JSON.parse(coverEncoded);
+
+    if (cover != null && imageMimeTypes.includes(cover.type)) {
+      tree.coverImage = Buffer.from(cover.data, "base64");
+      tree.coverImageType = cover.type;
+    } else {
+      tree.coverImage = await imageUrlToBuffer(DEFAULT_IMAGE_URL);
+      tree.coverImageType = "image/jpeg";
+    }
+  } catch (error) {
+    console.error("Error parsing coverEncoded: ", error);
+    tree.coverImage = await imageUrlToBuffer(DEFAULT_IMAGE_URL);
+    tree.coverImageType = "image/jpeg";
   }
 }
 
