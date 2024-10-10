@@ -72,6 +72,12 @@ app.use((err, req, res, next) => {
   });
 });
 
-const PORT = process.env.PORT || 7000;
+// Conditionally listen on a port only if NODE_ENV=development
+if (process.env.NODE_ENV !== "production") {
+  const PORT = process.env.PORT || 7000;
+  
+  app.listen(PORT, console.log(`Server running on port ${PORT}`));
+}
 
-app.listen(PORT, console.log(`Server running on port ${PORT}`));
+// Export the app for serverless function in production (Vercel)
+module.exports = app;
