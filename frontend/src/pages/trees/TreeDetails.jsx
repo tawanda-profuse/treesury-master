@@ -9,7 +9,7 @@ const TreeDetails = () => {
   const { id } = useParams();
   const url = window.location.origin.includes("localhost")
     ? `http://localhost:7000/trees/${id}`
-    : `https://treesury.onrender.com/trees/${id}`;
+    : `https://treesury-master.vercel.app/trees/${id}`;
   const [data, isPending, error] = useFetch(url);
 
   useEffect(() => {

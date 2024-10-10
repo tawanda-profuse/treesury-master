@@ -8,7 +8,7 @@ const NewTree = () => {
   }, []);
   const treeUrl = window.location.origin.includes("localhost")
     ? "http://localhost:7000/trees"
-    : "https://treesury.onrender.com/trees";
+    : "https://treesury-master.vercel.app/trees";
 
   const newTree = {
     tree_name: "",

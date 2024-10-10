@@ -9,7 +9,7 @@ const Home = () => {
   }, []);
   const url = window.location.origin.includes("localhost")
     ? "http://localhost:7000/trees"
-    : "https://treesury.onrender.com/trees";
+    : "https://treesury-master.vercel.app/trees";
   const [data, isPending, error] = useFetch(url);
 
   return (

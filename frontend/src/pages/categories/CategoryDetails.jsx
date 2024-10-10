@@ -7,7 +7,7 @@ const CategoryDetails = () => {
   const { id } = useParams();
   const url = window.location.origin.includes("localhost")
     ? `http://localhost:7000/categories/${id}`
-    : `https://treesury.onrender.com/categories/${id}`;
+    : `https://treesury-master.vercel.app/categories/${id}`;
   const [data, error, isPending] = useFetch(url);
 
   useEffect(() => {

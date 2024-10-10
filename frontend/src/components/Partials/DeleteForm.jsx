@@ -1,7 +1,7 @@
 const DeleteForm = ({ ID, directory }) => {
   const url = window.location.origin.includes("localhost")
     ? `http://localhost:7000/${directory}`
-    : `https://treesury.onrender.com/${directory}`;
+    : `https://treesury-master.vercel.app/${directory}`;
 
   return (
     <form

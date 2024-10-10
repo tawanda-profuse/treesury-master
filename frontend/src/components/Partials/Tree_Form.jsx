@@ -5,7 +5,7 @@ import { useState } from "react";
 const TreeForm = ({ tree }) => {
   const url = window.location.origin.includes("localhost")
     ? "http://localhost:7000/categories"
-    : "https://treesury.onrender.com/categories";
+    : "https://treesury-master.vercel.app/categories";
   const [categories, isPending, error] = useFetch(url);
   const [treeName, setTreeName] = useState(tree.tree_name);
   const [categoryID, setCategoryID] = useState(tree.category);

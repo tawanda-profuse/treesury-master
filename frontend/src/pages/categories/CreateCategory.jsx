@@ -11,7 +11,7 @@ const CreateCategory = () => {
   const [name, setName] = useState("");
   const url = window.location.origin.includes("localhost")
     ? "http://localhost:7000/categories"
-    : "https://treesury.onrender.com/categories";
+    : "https://treesury-master.vercel.app/categories";
 
   const handleAddCategory = async (event) => {
     event.preventDefault();

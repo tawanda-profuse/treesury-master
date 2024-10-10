@@ -9,7 +9,7 @@ const CategoryIndex = () => {
   }, []);
   const url = window.location.origin.includes("localhost")
     ? "http://localhost:7000/categories"
-    : "https://treesury.onrender.com/categories";
+    : "https://treesury-master.vercel.app/categories";
   const [data, isPending, error] = useFetch(url);
   const [searchTerm, setSearchTerm] = useState("");
   const filteredData = data.filter((item) =>
