@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const axios = require("axios");
 
-
 const treeSchema = new mongoose.Schema({
   tree_name: {
     type: String,
@@ -16,7 +15,7 @@ const treeSchema = new mongoose.Schema({
   },
   coverImageType: {
     type: String,
-    default: "image/jpeg"
+    default: "image/jpeg",
   },
   category: {
     type: mongoose.Schema.Types.ObjectId,
@@ -27,17 +26,17 @@ const treeSchema = new mongoose.Schema({
 
 async function imageUrlToBuffer(imageUrl) {
   try {
-      const response = await axios.get(imageUrl, {
-          responseType: "arraybuffer"
-      });
+    const response = await axios.get(imageUrl, {
+      responseType: "arraybuffer",
+    });
 
-      // Convert the image data to a Buffer
-      const buffer = Buffer.from(response.data, "binary");
+    // Convert the image data to a Buffer
+    const buffer = Buffer.from(response.data, "binary");
 
-      return buffer;
+    return buffer;
   } catch (error) {
-      console.error(`Error fetching image: ${error}`);
-      throw error;
+    console.error(`Error fetching image: ${error}`);
+    throw error;
   }
 }
 
@@ -60,6 +59,9 @@ treeSchema.virtual("coverImagePath").get(function () {
     };charset=utf-8;base64,${this.coverImage.toString("base64")}`;
   }
 });
+
+treeSchema.index({ tree_name: 1 });
+treeSchema.index({ coverImage: 1 });
 
 const Tree = mongoose.model("Tree", treeSchema);
 
