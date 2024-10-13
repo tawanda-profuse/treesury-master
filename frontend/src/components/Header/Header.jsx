@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link } from "react-router-dom";
 import "./Header.css";
 import { useState, useEffect, useRef } from "react";
 

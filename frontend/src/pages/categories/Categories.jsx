@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import CategoryList from "../../components/Partials/CategoryList";
 import useFetch from "../../utils/useFetch";
 import "./Categories.css";
+import Header from "../../components/Header/Header";
 
 const CategoryIndex = () => {
   useEffect(() => {
@@ -16,26 +17,38 @@ const CategoryIndex = () => {
     item.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
   return (
-    <>
-      <h2 className="page-header">Search Categories</h2>
-      <form>
-        <div className="form-row">
-          <div className="form-item">
-            <label>Family Name</label>
-            <input
-              type="text"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search for a tree family name."
-            />
+    <div className="container">
+      <Header />
+      <div className="inner-container">
+        <h2 className="page-header">Search Categories</h2>
+        <form>
+          <div className="form-row">
+            <div className="form-item">
+              <label>Family Name</label>
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder="Search for a tree family name."
+              />
+            </div>
           </div>
-        </div>
-      </form>
-      <br />
-      {error && <div>{error}</div>}
-      {isPending && <div>Loading...</div>}
-      {data && <CategoryList categories={filteredData} />}
-    </>
+        </form>
+        <br />
+        {error && <div>{error}</div>}
+        {isPending && <div>Loading...</div>}
+        {data && <CategoryList categories={filteredData} />}
+      </div>
+      <footer>
+        <a
+          href="https://en.wikipedia.org/wiki/List_of_tree_genera"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Tree Family Reference <i className="fas fa-tree"></i>
+        </a>
+      </footer>
+    </div>
   );
 };
 export default CategoryIndex;

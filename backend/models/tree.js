@@ -62,6 +62,7 @@ treeSchema.virtual("coverImagePath").get(function () {
 
 treeSchema.index({ tree_name: 1 });
 treeSchema.index({ coverImage: 1 });
+treeSchema.index({ coverImageType: 1 });
 
 const Tree = mongoose.model("Tree", treeSchema);
 

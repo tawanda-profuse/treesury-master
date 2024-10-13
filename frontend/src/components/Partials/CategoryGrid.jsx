@@ -1,6 +1,6 @@
 import React from "react";
 import { Buffer } from "buffer";
-import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import { Link } from "react-router-dom";
 
 const CategoryGrid = ({ information }) => {
   const bookCoverClass = "book-cover-large";

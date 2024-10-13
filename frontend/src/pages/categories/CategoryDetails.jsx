@@ -1,7 +1,8 @@
-import { useParams } from "react-router-dom/cjs/react-router-dom.min";
+import { useParams } from "react-router-dom";
 import useFetch from "../../utils/useFetch";
 import { useEffect } from "react";
 import CategoryGrid from "../../components/Partials/CategoryGrid";
+import Header from "../../components/Header/Header";
 
 const CategoryDetails = () => {
   const { id } = useParams();
@@ -17,7 +18,9 @@ const CategoryDetails = () => {
   });
 
   return (
-    <>
+    <div className="container">
+    <Header/>
+    <div className="inner-container">
       {error && <div>{error}</div>}
       {isPending && <div>Loading...</div>}
       {data && (
@@ -26,7 +29,17 @@ const CategoryDetails = () => {
           <CategoryGrid information={data} />
         </>
       )}
-    </>
+    </div>
+    <footer>
+        <a
+          href="https://en.wikipedia.org/wiki/List_of_tree_genera"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Tree Family Reference <i className="fas fa-tree"></i>
+        </a>
+      </footer>
+    </div>
   );
 };
 

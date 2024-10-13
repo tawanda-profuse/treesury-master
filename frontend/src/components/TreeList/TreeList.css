@@ -19,7 +19,6 @@
     justify-content: center;
     grid-gap: 2rem;
     grid-template-columns: repeat(auto-fill, var(--tree-cover-width));
-    min-height: 100vh;
 }
 
 .tree-grid img {
@@ -44,6 +43,36 @@
 
 .tree-details {
     display: flex;
+}
+
+.pagination{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 4rem auto;
+    gap: 1rem;
+
+    button{
+        outline: none;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 0.5rem;
+        font-size: 1.2rem;
+        color: white;
+        background-color: var(--grass);
+        cursor: pointer;
+
+        &:hover{
+            opacity: .9;
+        }
+    }
+
+    span{
+        background-color: var(--ground);
+        padding: 0.2rem 1rem;
+        color: var(--clouds);
+        font-size: 1.2rem;
+    }
 }
 
 @media (width < 1150px) {

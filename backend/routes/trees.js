@@ -8,14 +8,36 @@ const imageMimeTypes = ["image/jpeg", "image/png", "image/gif"];
 const DEFAULT_IMAGE_URL =
   "https://static.vecteezy.com/system/resources/previews/006/851/591/original/tree-illustration-with-cartoon-style-free-vector.jpg";
 
-
 // GET All Trees Route
 router.get("/", async (req, res) => {
-  const trees = await Tree.find();
+  let page = parseInt(req.query.page) || 1;
+  let limit = parseInt(req.query.limit) || 8;
+  let query = Tree.find().sort({ tree_name: "asc" });
+
+  // Search engine
+  if (req.query.tree_name != null && req.query.tree_name != "") {
+    query = query.regex("tree_name", new RegExp(req.query.tree_name, "i"));
+  }
+
+  // Pagination
+  const totalTrees = await Tree.countDocuments(query);
+  const trees = await query
+    .select("tree_name coverImage coverImageType")
+    .skip((page - 1) * limit)
+    .limit(limit)
+    .exec();
+
   try {
-    res.json(trees);
+    res.status(200).send({
+      trees: trees,
+      currentPage: page,
+      totalPages: Math.ceil(totalTrees / limit),
+    });
   } catch (error) {
     console.error(error);
+    res.status(500).send({
+      message: `Error: ${error}`,
+    });
   }
 });
 
@@ -61,7 +83,6 @@ router.put("/:id", async (req, res) => {
     console.error(error);
   }
 });
-
 
 async function imageUrlToBuffer(imageUrl) {
   try {
